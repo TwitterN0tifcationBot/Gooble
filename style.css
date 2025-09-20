@@ -1,0 +1,208 @@
+body {
+    background-color: #212121;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    color: white;
+    font-size: 16px;
+    margin: 0;
+    text-align: center;
+    align-items: center;
+    padding: 0;
+}
+
+body:white {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body:dark {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: center;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+h2 {
+    color: white;
+}
+
+p {
+    color: white;
+}
+
+a {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover {
+        cursor: pointer;
+    transition: 1.5s;
+
+        text-decoration: underline;
+}
+
+button {
+    background-color: #414141;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    backface-visibility: 0.8;
+}
+
+button:hover {
+    background-color: #000000;
+    color: white;
+    border-radius: 10px;
+    backface-visibility: 0.8;
+    transition: 1.5s;
+        background: linear-gradient(to bottom right, #660606, #590404);
+        transform: scale(1.1);
+}
+
+input, textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 20%;
+    box-sizing: border-box;
+    background-color: #212121;
+    color: white;
+    backface-visibility: 0.8
+}
+
+select {
+    width: 10%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #212121;
+    color: white;
+    backface-visibility: 0.8;
+}
+
+select:hover {
+    background-color: #000000;
+    color: white;
+    border-radius: 10px;
+    backface-visibility: 0.8;
+    transition: 1.5s;
+        transform: scale(1.1);
+}
+
+.container, .loginContainer {
+    display: flex;
+    justify-content: center; /* Center the container's content horizontally */
+    gap: 20px; /* Optional: Adds space between the elements */
+}
+
+.Branch1, .branch2, .branch3 {
+    background-color: rgb(68, 23, 23);
+    padding: 10px; /* Use a specific padding value instead of auto */
+    border-radius: 10px;
+    backface-visibility: hidden; /* Use 'hidden' instead of 0.8 */
+    height: auto;
+    width: 250px;
+    align-items: center; /* Center content vertically */
+    text-align: center; /* Center text */
+    flex-direction: column;
+    transition: 1.5s; /* Keep the transition property for smooth changes */
+    color: darkred; /* Keep the color property */
+}
+
+.parentContainer {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 50vh; /* Full viewport height *//* Optional: Background color for the parent container */
+}
+
+.loginContainer {
+    padding: 10px; /* Use a specific padding value instead of auto */
+    border-radius: 10px;
+    backface-visibility: hidden; /* Use 'hidden' instead of 0.8 */
+    height: 100px;
+    width: 50%;
+    align-items: center; /* Center content vertically */
+    text-align: center; /* Center text */
+    flex-direction: column;
+    transition: 1.5s; /* Keep the transition property for smooth changes */
+    color: rgb(255, 255, 255); /* Keep the color property */
+}
+
+label {
+ font-weight: bold;
+ color: white;
+ transition: 1.5s;
+}
+
+input[type="submit"] {
+    background-color: #414141;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    backface-visibility: 0.8;
+}
+
+input[type="submit"]:hover {
+    background-color: #000000;
+    color: white;
+    border-radius: 10px;
+    backface-visibility: 0.8;
+    transition: 1.5s;
+        transform: scale(1.1); /* Optional: Apply a scale transformation */
+
+}
+
+input:hover {
+    color: white;
+    border-radius: 10px;
+    backface-visibility: 0.8;
+    transition: 1.5s;
+        transform: scale(1.1); /* Optional: Apply a scale transformation */
+        background-color: #000000;
+        color: white;
+
+}
+
+
+.beta {
+    font-weight: bold;
+    background: linear-gradient(90deg, rgb(71, 237, 46), rgb(0, 120, 90));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+
+.options {
+    font-weight: bold;
+    background: linear-gradient(to bottom right, rgb(31, 113, 41), rgb(57, 145, 52));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    /* Fallback for browsers that do not support background-clip: text */
+    background-color: rgb(159, 6, 6);
+}
